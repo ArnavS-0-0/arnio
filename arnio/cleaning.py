@@ -1,0 +1,90 @@
+"""
+arnio.cleaning
+Data cleaning functions.
+"""
+
+from __future__ import annotations
+
+from typing import Any, Optional
+
+from ._core import (
+    _drop_nulls,
+    _fill_nulls,
+    _drop_duplicates,
+    _strip_whitespace,
+    _normalize_case,
+    _rename_columns,
+    _cast_types,
+)
+from .frame import ArFrame
+
+
+def drop_nulls(
+    frame: ArFrame,
+    *,
+    subset: Optional[list[str]] = None,
+) -> ArFrame:
+    """Remove rows containing null/empty values."""
+    result = _drop_nulls(frame._frame, subset=subset)
+    return ArFrame(result)
+
+
+def fill_nulls(
+    frame: ArFrame,
+    value: Any,
+    *,
+    subset: Optional[list[str]] = None,
+) -> ArFrame:
+    """Replace null/empty values with a given fill value."""
+    result = _fill_nulls(frame._frame, value, subset=subset)
+    return ArFrame(result)
+
+
+def drop_duplicates(
+    frame: ArFrame,
+    *,
+    subset: Optional[list[str]] = None,
+    keep: str = "first",
+) -> ArFrame:
+    """Remove duplicate rows."""
+    result = _drop_duplicates(frame._frame, subset=subset, keep=keep)
+    return ArFrame(result)
+
+
+def strip_whitespace(
+    frame: ArFrame,
+    *,
+    subset: Optional[list[str]] = None,
+) -> ArFrame:
+    """Trim leading/trailing whitespace from string columns."""
+    result = _strip_whitespace(frame._frame, subset=subset)
+    return ArFrame(result)
+
+
+def normalize_case(
+    frame: ArFrame,
+    *,
+    subset: Optional[list[str]] = None,
+    case: str = "lower",
+) -> ArFrame:
+    """Normalize string columns to lower/upper/title case."""
+    result = _normalize_case(frame._frame, subset=subset, case_type=case)
+    return ArFrame(result)
+
+
+def rename_columns(
+    frame: ArFrame,
+    mapping: dict[str, str],
+) -> ArFrame:
+    """Rename columns via a {old: new} dict."""
+    result = _rename_columns(frame._frame, mapping)
+    return ArFrame(result)
+
+
+def cast_types(
+    frame: ArFrame,
+    mapping: dict[str, str],
+) -> ArFrame:
+    """Cast columns to specified types via {col: type_str} dict."""
+    result = _cast_types(frame._frame, mapping)
+    return ArFrame(result)
