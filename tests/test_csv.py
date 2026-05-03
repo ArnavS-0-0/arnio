@@ -48,11 +48,13 @@ class TestReadCsv:
         frame = ar.read_csv(sample_csv)
         assert len(frame) == 3
 
-    def test_header_whitespace_strip(self, tmp_path):
-        test_file = tmp_path / "whitespace.csv"
-        test_file.write_text("name,age \nAlice,30\nBob,25")
+    def test_header_whitespace(self, tmp_path):
+        import os
+        csv_path = str(tmp_path / "whitespace.csv")
+        with open(csv_path, "w") as f:
+            f.write("name ,  age\nAlice,25\n")
         
-        frame = ar.read_csv(str(test_file))
+        frame = ar.read_csv(csv_path)
         assert frame.columns == ["name", "age"]
 
 

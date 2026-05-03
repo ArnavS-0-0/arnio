@@ -7,6 +7,17 @@
 
 namespace arnio {
 
+namespace {
+    inline void trim_in_place(std::string& s) {
+        s.erase(s.begin(), std::find_if(s.begin(), s.end(), [](unsigned char ch) {
+            return !std::isspace(ch);
+        }));
+        s.erase(std::find_if(s.rbegin(), s.rend(), [](unsigned char ch) {
+            return !std::isspace(ch);
+        }).base(), s.end());
+    }
+} // namespace
+
 CsvReader::CsvReader(const CsvConfig& config) : config_(config) {}
 
 std::vector<std::string> CsvReader::parse_line(const std::string& line) const {
@@ -132,8 +143,7 @@ Frame CsvReader::read(const std::string& path) const {
     if (config_.has_header && std::getline(file, line)) {
         header = parse_line(line);
         for (auto& h : header) {
-            h.erase(h.begin(), std::find_if(h.begin(), h.end(), [](unsigned char ch) { return !std::isspace(ch); }));
-            h.erase(std::find_if(h.rbegin(), h.rend(), [](unsigned char ch) { return !std::isspace(ch); }).base(), h.end());
+            trim_in_place(h);
         }
     }
 
@@ -218,8 +228,7 @@ std::unordered_map<std::string, std::string> CsvReader::scan_schema(const std::s
     if (std::getline(file, line)) {
         header = parse_line(line);
         for (auto& h : header) {
-            h.erase(h.begin(), std::find_if(h.begin(), h.end(), [](unsigned char ch) { return !std::isspace(ch); }));
-            h.erase(std::find_if(h.rbegin(), h.rend(), [](unsigned char ch) { return !std::isspace(ch); }).base(), h.end());
+            trim_in_place(h);
         }
     }
 

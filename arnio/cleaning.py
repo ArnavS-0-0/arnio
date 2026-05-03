@@ -88,3 +88,33 @@ def cast_types(
     """Cast columns to specified types via {col: type_str} dict."""
     result = _cast_types(frame._frame, mapping)
     return ArFrame(result)
+
+
+def clean(
+    frame: ArFrame,
+    *,
+    strip_whitespace: bool = True,
+    drop_nulls: bool = False,
+    drop_duplicates: bool = False,
+) -> ArFrame:
+    """Convenience function to apply common cleaning operations.
+    
+    Operations are applied in this order (if enabled):
+    1. strip_whitespace
+    2. drop_nulls
+    3. drop_duplicates
+    """
+    from .pipeline import pipeline
+    
+    steps = []
+    if strip_whitespace:
+        steps.append(("strip_whitespace",))
+    if drop_nulls:
+        steps.append(("drop_nulls",))
+    if drop_duplicates:
+        steps.append(("drop_duplicates",))
+        
+    if not steps:
+        return frame
+        
+    return pipeline(frame, steps)
