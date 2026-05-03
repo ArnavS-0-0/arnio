@@ -107,3 +107,22 @@ class TestCastTypes:
         frame = ar.read_csv(sample_csv)
         result = ar.cast_types(frame, {"age": "float64"})
         assert result.dtypes["age"] == "float64"
+
+
+class TestCleanAPI:
+    def test_clean_defaults(self, csv_with_whitespace):
+        frame = ar.read_csv(csv_with_whitespace)
+        result = ar.clean(frame)
+        df = ar.to_pandas(result)
+        # strip_whitespace is True by default
+        assert df["name"].iloc[0] == "Alice"
+        assert df["city"].iloc[1] == "London"
+        # drop_nulls and drop_duplicates are False by default
+        assert len(frame) == len(result)
+
+    def test_clean_all(self, csv_with_nulls):
+        # reuse csv_with_nulls as it has a null row (Bob missing name)
+        frame = ar.read_csv(csv_with_nulls)
+        # Drop nulls
+        result = ar.clean(frame, strip_whitespace=False, drop_nulls=True)
+        assert len(result) < len(frame)
