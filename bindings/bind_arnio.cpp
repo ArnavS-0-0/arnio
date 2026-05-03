@@ -101,12 +101,12 @@ PYBIND11_MODULE(_arnio_cpp, m) {
         CellValue cv;
         if (py::isinstance<py::str>(value)) {
             cv = value.cast<std::string>();
+        } else if (py::isinstance<py::bool_>(value)) {
+            cv = value.cast<bool>();
         } else if (py::isinstance<py::int_>(value)) {
             cv = value.cast<int64_t>();
         } else if (py::isinstance<py::float_>(value)) {
             cv = value.cast<double>();
-        } else if (py::isinstance<py::bool_>(value)) {
-            cv = value.cast<bool>();
         } else {
             cv = std::monostate{};
         }
