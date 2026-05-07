@@ -2,6 +2,7 @@
 
 import arnio as ar
 
+MESSY_CSV = "tests/fixtures/messy_sales_data.csv"
 
 class TestReadCsv:
     def test_basic_read(self, sample_csv):
@@ -76,6 +77,12 @@ class TestReadCsv:
 
         with pytest.raises(ValueError, match="File appears to be binary"):
             ar.read_csv(file_path)
+
+    def test_read_with_nulls(self, csv_with_nulls):
+        frame = ar.read_csv(csv_with_nulls)
+        assert frame is not None
+        assert frame.shape[0] == 3
+
 
 
 class TestScanCsv:
