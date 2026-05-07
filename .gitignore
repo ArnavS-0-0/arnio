@@ -1,7 +1,3 @@
-/*.csv
-
-!tests/fixtures/messy_sales_data.csv
-
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -232,3 +228,6 @@ wheelhouse/
 *.pyd
 *.dll
 _arnio_cpp*
+
+#csv
+/*.csv
