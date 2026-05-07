@@ -1,15 +1,29 @@
 <div align="center">
-  <br />
-  <h1>⚡ arnio</h1>
-    <b>Arnio</b> is an open-source C++ accelerated data preprocessing library<br />
-    <i>for Python. Built for speed and memory efficiency — and actively being optimized during GSSoC 2026.</i>
+  <picture align="center">
+    <source media="(prefers-color-scheme: dark)" srcset="arnio.svg">
+    <img alt="Arnio Logo" src="arnio.svg">
+  </picture>
   <br />
 
-  [![CI](https://github.com/im-anishraj/arnio/actions/workflows/ci.yml/badge.svg?style=for-the-badge&color=2ea44f)](https://github.com/im-anishraj/arnio/actions/workflows/ci.yml)
-  [![PyPI](https://img.shields.io/pypi/v/arnio?style=for-the-badge&color=blue)](https://pypi.org/project/arnio/)
-  [![Python](https://img.shields.io/pypi/pyversions/arnio?style=for-the-badge&color=black)](https://pypi.org/project/arnio/)
-  [![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)](LICENSE)
+  <b>Arnio</b> is an open-source C++ accelerated data preprocessing library<br />
+  <i>for Python. Built for speed and memory efficiency — and actively being optimized during GSSoC 2026.</i>
+  <br />
 
+  <br />
+  <p align="center">
+    <!-- Package Stats -->
+    <a href="https://pypi.org/project/arnio/"><img src="https://img.shields.io/pypi/v/arnio?style=for-the-badge&logo=pypi&logoColor=white&color=blue" alt="PyPI Latest Release"></a>
+    <a href="https://pypi.org/project/arnio/"><img src="https://img.shields.io/pypi/pyversions/arnio?style=for-the-badge&logo=python&logoColor=white&color=black" alt="Python Versions"></a>
+    <a href="https://pypi.org/project/arnio/"><img src="https://img.shields.io/pypi/dm/arnio?style=for-the-badge&logo=pypi&logoColor=white&color=blue" alt="PyPI Downloads"></a>
+    <br>
+    <!-- Health / Meta -->
+    <a href="https://github.com/im-anishraj/arnio/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/im-anishraj/arnio/ci.yml?branch=main&label=CI&style=for-the-badge&logo=github&color=2ea44f" alt="CI"></a>
+    <a href="https://github.com/im-anishraj/arnio/actions/workflows/build_wheels.yml"><img src="https://img.shields.io/github/actions/workflow/status/im-anishraj/arnio/build_wheels.yml?branch=main&label=Wheels&style=for-the-badge&logo=github&color=2ea44f" alt="Build Wheels"></a>
+    <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge" alt="Code style: black"></a>
+    <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License"></a>
+    <a href="https://gssoc.girlscript.tech/"><img src="https://img.shields.io/badge/GSSoC-2026-orange.svg?style=for-the-badge" alt="GSSoC"></a>
+  </p>
+  <br />
   <p>
     <a href="#-the-problem">The Problem</a> •
     <a href="#-the-solution-arnio">The Solution</a> •
