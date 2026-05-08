@@ -1,5 +1,6 @@
 """Tests for CSV reading functionality."""
 
+import pandas as pd
 import arnio as ar
 
 MESSY_CSV = "tests/fixtures/messy_sales_data.csv"
@@ -80,8 +81,27 @@ class TestReadCsv:
 
     def test_read_with_nulls(self, csv_with_nulls):
         frame = ar.read_csv(csv_with_nulls)
-        assert frame is not None
-        assert frame.shape[0] == 3
+        assert frame.shape == (4, 3)
+
+        df = ar.to_pandas(frame)
+        assert df["name"].isna().sum() == 1
+        assert df["age"].isna().sum() == 1
+        assert df["score"].isna().sum() == 1
+
+        assert pd.isna(df.loc[1, "name"])
+        assert pd.isna(df.loc[1, "score"])
+        assert pd.isna(df.loc[2, "age"])
+
+        assert df.loc[0, "name"] == "Alice"
+        assert df.loc[3, "name"] == "Diana"
+
+    def test_read_messy_nulls(self):
+        frame = ar.read_csv(MESSY_CSV)
+        assert frame.shape == (3, 3)
+
+        df = ar.to_pandas(frame)
+        assert df["revenue"].isna().sum() == 1
+        assert pd.isna(df.loc[1, "revenue"])
 
 
 

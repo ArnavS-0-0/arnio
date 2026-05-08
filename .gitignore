@@ -229,5 +229,5 @@ wheelhouse/
 *.dll
 _arnio_cpp*
 
-#csv
+# csv
 /*.csv
