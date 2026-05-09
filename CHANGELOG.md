@@ -13,6 +13,8 @@
 * remove duplicated code ([0e215f9](https://github.com/im-anishraj/arnio/commit/0e215f9080abbe77183f51a9a1b07e90d60bc54f))
 
 ## [Unreleased]
+### Fixed
+- Fixed type consistency check in Column (#52)
 
 ## [1.0.0] - 2026-05-08
 ### Added
