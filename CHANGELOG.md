@@ -14,7 +14,7 @@
 - Migrated from `FetchContent` to `find_package(pybind11)` for faster, offline, and more robust cross-platform builds.
 - Refactored `cibuildwheel` configuration entirely into `pyproject.toml` for standard and declarative packaging.
 
-## [0.1.3] - 2026-05-XX
+## [0.1.3] - 2026-05-06
 ### Fixed
 - `normalize_case()` now accepts `case_type` kwarg as documented in README
   (previously accepted `case=`, causing TypeError for all README users)

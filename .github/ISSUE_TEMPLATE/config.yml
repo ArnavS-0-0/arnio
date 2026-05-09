@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Questions & Discussion
+    url: https://github.com/im-anishraj/arnio/discussions
+    about: Ask questions or start a discussion instead of opening an issue.
+  - name: 📖 Contributing Guide
+    url: https://github.com/im-anishraj/arnio/blob/main/.github/CONTRIBUTING.md
+    about: Read this before making your first contribution.

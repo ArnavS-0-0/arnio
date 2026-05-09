@@ -18,7 +18,7 @@
     <br>
     <!-- Health / Meta -->
     <a href="https://github.com/im-anishraj/arnio/actions/workflows/ci.yml"><img src="https://img.shields.io/github/actions/workflow/status/im-anishraj/arnio/ci.yml?branch=main&label=CI&style=for-the-badge&logo=github&color=2ea44f" alt="CI"></a>
-    <a href="https://github.com/im-anishraj/arnio/actions/workflows/build_wheels.yml"><img src="https://img.shields.io/github/actions/workflow/status/im-anishraj/arnio/build_wheels.yml?branch=main&label=Wheels&style=for-the-badge&logo=github&color=2ea44f" alt="Build Wheels"></a>
+    <a href="https://github.com/im-anishraj/arnio/actions/workflows/build_wheels.yml"><img src="https://img.shields.io/github/actions/workflow/status/im-anishraj/arnio/build_wheels.yml?label=Wheels&style=for-the-badge&logo=github&color=2ea44f" alt="Build Wheels"></a>
     <a href="https://github.com/psf/black"><img src="https://img.shields.io/badge/code%20style-black-000000.svg?style=for-the-badge" alt="Code style: black"></a>
     <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge" alt="License"></a>
     <a href="https://gssoc.girlscript.tech/"><img src="https://img.shields.io/badge/GSSoC-2026-orange.svg?style=for-the-badge" alt="GSSoC"></a>
@@ -37,9 +37,7 @@
 > **Pandas is incredible for analysis. It is notoriously slow and memory-hungry for ingesting and cleaning raw CSVs.** <br/>
 > Arnio exists to do exactly one thing: intercept your messy CSVs, clean them natively in C++, and hand you a pristine Pandas DataFrame in half the time.
 
-<p align="center">
-  <img src="intro.gif" alt="arnio demo" width="80%" style="border-radius: 12px; border: 1px solid #30363D; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
-</p>
+
 
 ## 🧨 The Problem
 
