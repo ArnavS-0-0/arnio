@@ -299,6 +299,46 @@ clean = ar.pipeline(frame, [
 
 <br>
 
+## 🧠 Data quality engine
+
+Arnio now includes built-in dataset understanding before you analyze in pandas.
+
+```python
+report = ar.profile(frame)
+print(report.summary())
+
+suggestions = ar.suggest_cleaning(frame)
+clean = ar.pipeline(frame, suggestions)
+```
+
+For production data contracts:
+
+```python
+schema = ar.Schema({
+    "id": ar.Int64(nullable=False, unique=True),
+    "email": ar.Email(nullable=False),
+    "revenue": ar.Float64(nullable=True, min=0),
+})
+
+result = ar.validate(frame, schema)
+if not result.passed:
+    print(result.to_pandas())
+```
+
+For low-risk automatic cleanup:
+
+```python
+clean, report = ar.auto_clean(frame, mode="strict", return_report=True)
+```
+
+This is the layer pandas does not try to own: profiling, data contracts, row-level validation issues, and safe cleaning suggestions for messy incoming datasets.
+
+<br>
+
+---
+
+<br>
+
 ## 🗺️ Roadmap
 
 | Version | Focus | Status |
