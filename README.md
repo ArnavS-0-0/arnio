@@ -102,11 +102,11 @@ df = ar.to_pandas(clean_frame)
 
 | Metric | pandas | arnio v1.0.0 | Note |
 | :--- | :--- | :--- | :--- |
-| **Peak RAM** | 211MB | **212MB** | Parity achieved. C++ native parsing prevents memory spikes. |
+| **Peak RAM** | 211MB | **212MB** | Near parity in the reference run. Validate on your own workload. |
 | **Clean Syntax** | Python Loops | **Declarative** | No more spaghetti `.apply()` lambdas. |
 | **Execution Time** | **4.73s** | 5.75s | *Active optimization target for v0.2.0.* |
 
-**Current state:** Arnio achieves memory parity with pandas while offering a much cleaner declarative API. Speed optimization is our primary focus for `v0.2.0` — specifically, C++ implementations of `drop_duplicates` and `strip_whitespace` are currently unoptimized and are the main contributors to the execution time gap.
+**Current state:** Arnio offers a cleaner declarative API and is actively being benchmarked against pandas. Speed and memory optimization remain the primary focus for `v0.2.0` — specifically, C++ implementations of `drop_duplicates` and `strip_whitespace` are currently unoptimized and are the main contributors to the execution time gap.
 
 **[Help close the gap →](https://github.com/im-anishraj/arnio/issues)**
 
@@ -150,7 +150,7 @@ Arnio is a GSSoC 2026 project. We welcome contributors of all levels.
   — these are the current performance bottleneck
 - **Docs & examples**: Always needed
 
-[Read the Contribution Guide →](CONTRIBUTING.md) |
+[Read the Contribution Guide →](.github/CONTRIBUTING.md) |
 [Browse open issues →](https://github.com/im-anishraj/arnio/issues)
 
 ---
