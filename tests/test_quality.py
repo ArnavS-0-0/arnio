@@ -1,0 +1,77 @@
+"""Tests for data quality profiling and smart cleaning."""
+
+import pandas as pd
+
+import arnio as ar
+
+
+def test_profile_reports_quality_signals(tmp_path):
+    path = tmp_path / "quality.csv"
+    path.write_text(
+        "id,name,email,score\n"
+        "1, Alice ,alice@test.com,95.5\n"
+        "2,Bob,bob@test.com,\n"
+        "2,Bob,bob@test.com,\n"
+    )
+
+    report = ar.profile(ar.read_csv(path))
+
+    assert report.row_count == 3
+    assert report.column_count == 4
+    assert report.duplicate_rows == 1
+    assert report.columns["name"].whitespace_count == 1
+    assert report.columns["email"].semantic_type == "email"
+    assert report.columns["score"].null_count == 2
+    assert ("drop_duplicates", {"keep": "first"}) in report.suggestions
+
+
+def test_report_summary_and_pandas_output(csv_with_whitespace):
+    report = ar.profile(ar.read_csv(csv_with_whitespace))
+    summary = report.summary()
+    df = report.to_pandas()
+
+    assert summary["rows"] == 3
+    assert summary["columns_with_whitespace"] == ["name", "city"]
+    assert isinstance(df, pd.DataFrame)
+    assert set(df["name"]) == {"name", "city"}
+
+
+def test_suggest_cleaning_returns_pipeline_compatible_steps(csv_with_duplicates):
+    frame = ar.read_csv(csv_with_duplicates)
+    suggestions = ar.suggest_cleaning(frame)
+
+    assert suggestions == [("drop_duplicates", {"keep": "first"})]
+    clean = ar.pipeline(frame, suggestions)
+    assert clean.shape == (3, 2)
+
+
+def test_auto_clean_safe_trims_without_dropping_duplicates(tmp_path):
+    path = tmp_path / "safe.csv"
+    path.write_text("name\n Alice \n Alice \n")
+
+    frame = ar.read_csv(path)
+    clean, report = ar.auto_clean(frame, return_report=True)
+    df = ar.to_pandas(clean)
+
+    assert report.duplicate_rows == 1
+    assert clean.shape == (2, 1)
+    assert list(df["name"]) == ["Alice", "Alice"]
+
+
+def test_auto_clean_strict_applies_exact_deduplication(tmp_path):
+    path = tmp_path / "strict.csv"
+    path.write_text("name\n Alice \n Alice \n")
+
+    clean = ar.auto_clean(ar.read_csv(path), mode="strict")
+
+    assert clean.shape == (1, 1)
+
+
+def test_auto_clean_rejects_unknown_mode(sample_csv):
+    frame = ar.read_csv(sample_csv)
+
+    try:
+        ar.auto_clean(frame, mode="wild")
+        assert False, "Expected ValueError"
+    except ValueError as exc:
+        assert "mode must be" in str(exc)

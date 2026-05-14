@@ -26,6 +26,26 @@ from .exceptions import ArnioError, CsvReadError, TypeCastError, UnknownStepErro
 from .frame import ArFrame
 from .io import read_csv, scan_csv
 from .pipeline import pipeline, register_step
+from .quality import (
+    ColumnProfile,
+    DataQualityReport,
+    auto_clean,
+    profile,
+    suggest_cleaning,
+)
+from .schema import (
+    URL,
+    Bool,
+    Email,
+    Field,
+    Float64,
+    Int64,
+    Schema,
+    String,
+    ValidationIssue,
+    ValidationResult,
+    validate,
+)
 
 __all__ = [
     # Core class
@@ -48,6 +68,24 @@ __all__ = [
     # Pipeline
     "pipeline",
     "register_step",
+    # Data quality
+    "profile",
+    "suggest_cleaning",
+    "auto_clean",
+    "ColumnProfile",
+    "DataQualityReport",
+    # Schema validation
+    "Schema",
+    "Field",
+    "ValidationIssue",
+    "ValidationResult",
+    "validate",
+    "Int64",
+    "Float64",
+    "String",
+    "Bool",
+    "Email",
+    "URL",
     # Exceptions
     "UnknownStepError",
     "ArnioError",
