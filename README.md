@@ -350,6 +350,82 @@ clean, report = ar.auto_clean(frame, mode="strict", return_report=True)
 
 This is the layer pandas does not try to own: profiling, data contracts, row-level validation issues, and safe cleaning suggestions for messy incoming datasets.
 
+---
+
+## Data Quality Reports
+
+Arnio provides detailed profiling for datasets via `ar.profile()`. Below are examples of the report outputs in the three primary formats:
+
+### 1. Terminal Representation
+
+*The standard string representation of a report when printed in the console.*
+
+```text
+DataQualityReport(
+    row_count=4, 
+    column_count=3, 
+    memory_usage=785, 
+    duplicate_rows=0, 
+    columns={
+        'user_id': ColumnProfile(dtype='int64', semantic_type='identifier', unique_count=4),
+        'email': ColumnProfile(dtype='string', semantic_type='categorical', null_count=1, warnings=['contains_nulls']),
+        'score': ColumnProfile(dtype='float64', semantic_type='numeric', mean=87.9)
+    }
+)
+
+```
+
+### 2. JSON Format
+
+*Reports can be exported as structured JSON (via `.to_dict()`) for integration with APIs or dashboards.*
+
+```json
+{
+  "row_count": 4,
+  "column_count": 3,
+  "memory_usage": 785,
+  "duplicate_rows": 0,
+  "duplicate_ratio": 0.0,
+  "columns": {
+    "user_id": {
+      "dtype": "int64",
+      "semantic_type": "identifier",
+      "null_count": 0,
+      "unique_ratio": 1.0,
+      "mean": 102.5
+    },
+    "email": {
+      "dtype": "string",
+      "semantic_type": "categorical",
+      "null_count": 1,
+      "unique_ratio": 0.67,
+      "warnings": ["contains_nulls"]
+    },
+    "score": {
+      "dtype": "float64",
+      "semantic_type": "numeric",
+      "null_count": 1,
+      "mean": 87.9,
+      "warnings": ["contains_nulls"]
+    }
+  }
+}
+
+```
+
+### 3. Markdown Summary
+
+
+
+| Metric | Value |
+| --- | --- |
+| **Row Count** | 4 |
+| **Column Count** | 3 |
+| **Memory Usage** | 785 bytes |
+| **Duplicates** | 0 (0.0%) |
+
+---
+
 <br>
 
 ---
