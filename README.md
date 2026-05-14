@@ -350,34 +350,44 @@ clean, report = ar.auto_clean(frame, mode="strict", return_report=True)
 
 This is the layer pandas does not try to own: profiling, data contracts, row-level validation issues, and safe cleaning suggestions for messy incoming datasets.
 
----
-
 ## Data Quality Reports
 
-Arnio provides detailed profiling for datasets via `ar.profile()`. Below are examples of the report outputs in the three primary formats:
+Arnio provides detailed profiling for datasets via `ar.profile()`. To generate the report shown in these examples, the following code was used:
+
+```python
+import arnio as ar
+import pandas as pd
+
+# Sample dataset
+data = {
+    "user_id": [101, 102, 103, 104],
+    "email": ["test@arnio.ai", "invalid-email", None, "test@arnio.ai"],
+    "score": [85.5, 90.0, None, 88.2]
+}
+
+df = ar.from_pandas(pd.DataFrame(data))
+report = ar.profile(df)
+```
 
 ### 1. Terminal Representation
-
-*The standard string representation of a report when printed in the console.*
+*Standard string representation of the report object:*
 
 ```text
 DataQualityReport(
-    row_count=4, 
-    column_count=3, 
-    memory_usage=785, 
-    duplicate_rows=0, 
+    row_count=4,
+    column_count=3,
+    memory_usage=785,
+    duplicate_rows=0,
     columns={
         'user_id': ColumnProfile(dtype='int64', semantic_type='identifier', unique_count=4),
         'email': ColumnProfile(dtype='string', semantic_type='categorical', null_count=1, warnings=['contains_nulls']),
         'score': ColumnProfile(dtype='float64', semantic_type='numeric', mean=87.9)
     }
 )
-
 ```
 
 ### 2. JSON Format
-
-*Reports can be exported as structured JSON (via `.to_dict()`) for integration with APIs or dashboards.*
+*Reports can be exported as structured JSON (via `.to_dict()`) for integration with APIs or dashboards:*
 
 ```json
 {
@@ -410,23 +420,17 @@ DataQualityReport(
     }
   }
 }
-
 ```
 
-### 3. Markdown Summary
-
-
+### 3. Example Summary Table
+*Example of a manually formatted Markdown table representing the core metrics:*
 
 | Metric | Value |
-| --- | --- |
+| :--- | :--- |
 | **Row Count** | 4 |
 | **Column Count** | 3 |
 | **Memory Usage** | 785 bytes |
-| **Duplicates** | 0 (0.0%) |
-
----
-
-<br>
+| **Duplicates** | 0 (0.0%) |<br>
 
 ---
 
