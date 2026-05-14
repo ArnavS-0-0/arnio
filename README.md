@@ -350,6 +350,7 @@ clean, report = ar.auto_clean(frame, mode="strict", return_report=True)
 
 This is the layer pandas does not try to own: profiling, data contracts, row-level validation issues, and safe cleaning suggestions for messy incoming datasets.
 
+<br>
 ## Data Quality Reports
 
 Arnio provides detailed profiling for datasets via `ar.profile()`. To generate the report shown in these examples, the following code was used:
